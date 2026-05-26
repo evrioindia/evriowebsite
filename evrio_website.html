@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evrio — Design Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #fafafa;
+    --gray-1: #f5f5f5;
+    --gray-2: #e8e8e8;
+    --gray-4: #888;
+    --gray-6: #3a3a3a;
+    --accent: #1a1a1a;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --radius: 14px;
+    --nav-h: 64px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--white);
+    color: var(--black);
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    background: rgba(250,250,250,0.88);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--gray-2);
+    z-index: 100;
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: -0.3px;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--gray-6);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--black); }
+
+  .nav-cta {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+    background: var(--black);
+    padding: 9px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: opacity 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.8; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: calc(var(--nav-h) + 60px) 24px 80px;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-4);
+    margin-bottom: 28px;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 8vw, 88px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    color: var(--black);
+    max-width: 800px;
+    margin-bottom: 28px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gray-4);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--gray-4);
+    max-width: 480px;
+    line-height: 1.65;
+    margin-bottom: 48px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    background: var(--black);
+    border: none;
+    padding: 14px 32px;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.78; }
+
+  .btn-ghost {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--gray-6);
+    background: transparent;
+    border: 1px solid var(--gray-2);
+    padding: 14px 32px;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--gray-4); color: var(--black); }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--gray-2);
+    margin: 0;
+  }
+
+  /* SERVICES */
+  section {
+    padding: 96px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray-4);
+    margin-bottom: 56px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 50px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.8px;
+    color: var(--black);
+    margin-bottom: 64px;
+    max-width: 560px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--gray-2);
+    border: 1px solid var(--gray-2);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .service-card {
+    background: var(--white);
+    padding: 44px 40px;
+    transition: background 0.2s;
+    cursor: default;
+  }
+
+  .service-card:hover { background: var(--gray-1); }
+
+  .service-num {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gray-4);
+    letter-spacing: 0.1em;
+    margin-bottom: 28px;
+    display: block;
+  }
+
+  .service-name {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--black);
+    margin-bottom: 14px;
+    letter-spacing: -0.3px;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    color: var(--gray-4);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* WORK */
+  .work-section {
+    padding: 96px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .work-card {
+    background: var(--gray-1);
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: flex-end;
+    padding: 24px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .work-card:hover { transform: scale(1.02); }
+
+  .work-card-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 80px;
+    opacity: 0.06;
+    color: var(--black);
+    letter-spacing: -4px;
+    pointer-events: none;
+  }
+
+  .work-card-label {
+    position: relative;
+    z-index: 1;
+  }
+
+  .work-client {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--black);
+    margin-bottom: 2px;
+  }
+
+  .work-type {
+    font-size: 12px;
+    color: var(--gray-4);
+    font-weight: 300;
+  }
+
+  /* ABOUT STRIP */
+  .about-strip {
+    padding: 96px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-text {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    color: var(--black);
+  }
+
+  .about-text em { font-style: italic; color: var(--gray-4); }
+
+  .about-detail {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--gray-4);
+    line-height: 1.75;
+  }
+
+  .about-detail p + p { margin-top: 20px; }
+
+  /* STATS */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--gray-2);
+    border: 1px solid var(--gray-2);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: 80px;
+  }
+
+  .stat-item {
+    background: var(--white);
+    padding: 40px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 400;
+    color: var(--black);
+    letter-spacing: -1px;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--gray-4);
+    font-weight: 300;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    padding: 96px 48px 120px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .contact-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 62px);
+    font-weight: 400;
+    letter-spacing: -1px;
+    line-height: 1.08;
+    margin-bottom: 28px;
+  }
+
+  .contact-section h2 em { font-style: italic; color: var(--gray-4); }
+
+  .contact-section p {
+    font-size: 16px;
+    color: var(--gray-4);
+    font-weight: 300;
+    margin-bottom: 44px;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--gray-2);
+    padding: 32px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--black);
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--gray-4);
+    font-weight: 300;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+    color: var(--gray-4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--black); }
+
+  /* SCROLL ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 700px) {
+    nav { padding: 0 20px; }
+    nav .nav-links { display: none; }
+    section, .work-section, .contact-section, footer { padding-left: 20px; padding-right: 20px; }
+    .services-grid, .work-grid { grid-template-columns: 1fr; }
+    .about-strip { grid-template-columns: 1fr; gap: 40px; }
+    .stats-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Evrio</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Creative Digital Studio</p>
+  <h1>Design that <em>moves</em><br>people forward</h1>
+  <p class="hero-sub">We craft digital experiences that are precise, purposeful, and built to last.</p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="#work">View our work</a>
+    <a class="btn-ghost" href="#services">What we do</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SERVICES -->
+<section id="services">
+  <p class="section-label">What we do</p>
+  <h2 class="section-title">Every pixel with intention</h2>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <span class="service-num">01</span>
+      <h3 class="service-name">UI / UX Design</h3>
+      <p class="service-desc">Interfaces that feel intuitive from the very first interaction — clean, considered, and conversion-focused.</p>
+    </div>
+    <div class="service-card fade-up" style="transition-delay:0.08s">
+      <span class="service-num">02</span>
+      <h3 class="service-name">Web Development</h3>
+      <p class="service-desc">Fast, modern websites built with the right technology — from landing pages to full-scale platforms.</p>
+    </div>
+    <div class="service-card fade-up" style="transition-delay:0.16s">
+      <span class="service-num">03</span>
+      <h3 class="service-name">Digital Marketing</h3>
+      <p class="service-desc">Strategy and execution that grows brands — SEO, content, ads, and everything in between.</p>
+    </div>
+    <div class="service-card fade-up" style="transition-delay:0.24s">
+      <span class="service-num">04</span>
+      <h3 class="service-name">Cybersecurity</h3>
+      <p class="service-desc">Protecting your digital presence with rigorous security practices, compliance frameworks, and risk management.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WORK -->
+<div class="work-section" id="work">
+  <p class="section-label">Selected work</p>
+  <div class="work-grid">
+    <div class="work-card fade-up">
+      <div class="work-card-bg">YV</div>
+      <div class="work-card-label">
+        <p class="work-client">YouVue</p>
+        <p class="work-type">Brand Identity & Digital</p>
+      </div>
+    </div>
+    <div class="work-card fade-up" style="transition-delay:0.08s; background:#f0ede8;">
+      <div class="work-card-bg">WC</div>
+      <div class="work-card-label">
+        <p class="work-client">Well Care Fiber</p>
+        <p class="work-type">Branding & Print</p>
+      </div>
+    </div>
+    <div class="work-card fade-up" style="transition-delay:0.16s; background:#e8ece8;">
+      <div class="work-card-bg">EV</div>
+      <div class="work-card-label">
+        <p class="work-client">Evrio Studio</p>
+        <p class="work-type">Brand System</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<div class="about-strip" id="about">
+  <div class="about-text fade-up">
+    We believe great design is never just <em>visual</em> — it's a solution in disguise.
+  </div>
+  <div class="about-detail fade-up" style="transition-delay:0.1s">
+    <p>Evrio is a creative digital studio based in Kerala, India. We work with brands who care about doing things properly — thoughtful strategy, refined design, and engineering that holds up.</p>
+    <p>Our team brings together expertise in design, development, and security to deliver work that is as dependable as it is beautiful.</p>
+  </div>
+</div>
+
+<!-- STATS -->
+<div style="max-width:1100px; margin:0 auto; padding:0 48px 96px;">
+  <div class="stats-row fade-up">
+    <div class="stat-item">
+      <span class="stat-num">4+</span>
+      <span class="stat-label">Services offered</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">Client satisfaction</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">Kerala</span>
+      <span class="stat-label">Based in India</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <h2 class="fade-up">Ready to build<br>something <em>great</em>?</h2>
+  <p class="fade-up" style="transition-delay:0.08s">Tell us about your project and we'll get back to you within 24 hours.</p>
+  <a class="btn-primary fade-up" style="transition-delay:0.16s; display:inline-block; font-size:15px; padding:16px 40px;" href="mailto:hello@evrio.in">hello@evrio.in</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Evrio</span>
+  <p class="footer-copy">© 2026 Evrio. All rights reserved.</p>
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
