@@ -5,37 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Evrio — Design Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --black: #0a0a0a;
-    --white: #fafafa;
-    --gray-1: #f5f5f5;
-    --gray-2: #e8e8e8;
-    --gray-4: #888;
-    --gray-6: #3a3a3a;
-    --accent: #1a1a1a;
-    --font-display: 'DM Serif Display', Georgia, serif;
-    --font-body: 'DM Sans', system-ui, sans-serif;
-    --radius: 14px;
-    --nav-h: 64px;
+    --bg:        #080a08;
+    --surface:   #0f120f;
+    --surface-2: #161a16;
+    --accent:    #aaff00;
+    --accent-dim:#6baa00;
+    --text:      #f2f5f2;
+    --muted:     #6b7a6b;
+    --border:    rgba(170,255,0,0.10);
+    --border-dim:rgba(255,255,255,0.06);
+    --font-display: 'Bebas Neue', Impact, sans-serif;
+    --font-body:    'Syne', system-ui, sans-serif;
+    --radius: 16px;
+    --nav-h: 68px;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
     font-family: var(--font-body);
-    background: var(--white);
-    color: var(--black);
+    background: var(--bg);
+    color: var(--text);
     font-size: 16px;
     line-height: 1.6;
-    font-weight: 400;
     overflow-x: hidden;
   }
 
-  /* NAV */
+  /* ─── NAV ─── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -44,18 +45,18 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 48px;
-    background: rgba(250,250,250,0.88);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border-bottom: 1px solid var(--gray-2);
+    background: rgba(8,10,8,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-dim);
     z-index: 100;
   }
 
   .nav-logo {
     font-family: var(--font-display);
-    font-size: 22px;
-    letter-spacing: -0.3px;
-    color: var(--black);
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--accent);
     text-decoration: none;
   }
 
@@ -66,73 +67,114 @@
   }
 
   .nav-links a {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--gray-6);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
     text-decoration: none;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     transition: color 0.2s;
   }
-
-  .nav-links a:hover { color: var(--black); }
+  .nav-links a:hover { color: var(--accent); }
 
   .nav-cta {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--white);
-    background: var(--black);
-    padding: 9px 20px;
-    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 10px 22px;
+    border-radius: 4px;
     text-decoration: none;
-    letter-spacing: 0.01em;
-    transition: opacity 0.2s;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background 0.2s, opacity 0.2s;
   }
-  .nav-cta:hover { opacity: 0.8; }
+  .nav-cta:hover { background: #c8ff33; }
 
-  /* HERO */
+  /* ─── HERO ─── */
   .hero {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: calc(var(--nav-h) + 60px) 24px 80px;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: calc(var(--nav-h) + 40px) 48px 80px;
     position: relative;
+    overflow: hidden;
+  }
+
+  /* Frog-style: big ghost text background */
+  .hero-bg-text {
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    transform: translateY(-50%);
+    font-family: var(--font-display);
+    font-size: clamp(160px, 22vw, 320px);
+    color: rgba(170,255,0,0.04);
+    letter-spacing: -4px;
+    pointer-events: none;
+    white-space: nowrap;
+    user-select: none;
+    line-height: 1;
+  }
+
+  /* Green top accent line */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: var(--nav-h);
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
   }
 
   .hero-eyebrow {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--gray-4);
-    margin-bottom: 28px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 2px;
+    background: var(--accent);
+    display: inline-block;
+    flex-shrink: 0;
   }
 
   .hero h1 {
     font-family: var(--font-display);
-    font-size: clamp(48px, 8vw, 88px);
+    font-size: clamp(72px, 12vw, 160px);
     font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -1.5px;
-    color: var(--black);
-    max-width: 800px;
-    margin-bottom: 28px;
+    line-height: 0.92;
+    letter-spacing: 2px;
+    color: var(--text);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    position: relative;
+    max-width: 900px;
   }
 
-  .hero h1 em {
-    font-style: italic;
-    color: var(--gray-4);
+  .hero h1 .accent-word {
+    color: var(--accent);
   }
 
   .hero-sub {
-    font-size: 18px;
-    font-weight: 300;
-    color: var(--gray-4);
-    max-width: 480px;
-    line-height: 1.65;
-    margin-bottom: 48px;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--muted);
+    max-width: 440px;
+    line-height: 1.7;
+    margin-bottom: 44px;
+    position: relative;
   }
 
   .hero-actions {
@@ -140,50 +182,71 @@
     gap: 14px;
     align-items: center;
     flex-wrap: wrap;
-    justify-content: center;
+    position: relative;
   }
 
   .btn-primary {
     font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--white);
-    background: var(--black);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--bg);
+    background: var(--accent);
     border: none;
     padding: 14px 32px;
-    border-radius: 50px;
+    border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
-    letter-spacing: 0.01em;
-    transition: opacity 0.2s;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.2s;
   }
-  .btn-primary:hover { opacity: 0.78; }
+  .btn-primary:hover { background: #c8ff33; }
 
   .btn-ghost {
     font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--gray-6);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
     background: transparent;
-    border: 1px solid var(--gray-2);
+    border: 1px solid var(--border-dim);
     padding: 14px 32px;
-    border-radius: 50px;
+    border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     transition: border-color 0.2s, color 0.2s;
   }
-  .btn-ghost:hover { border-color: var(--gray-4); color: var(--black); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 
-  /* DIVIDER */
-  .divider {
-    width: 100%;
-    height: 1px;
-    background: var(--gray-2);
-    margin: 0;
+  /* ─── TRUST BAR ─── */
+  .trust-bar {
+    background: var(--accent);
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    overflow: hidden;
+  }
+  .trust-bar span {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bg);
+    white-space: nowrap;
+  }
+  .trust-bar .dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--bg);
+    opacity: 0.4;
+    flex-shrink: 0;
   }
 
-  /* SERVICES */
-  section {
+  /* ─── SECTION SHARED ─── */
+  .section-wrap {
     padding: 96px 48px;
     max-width: 1100px;
     margin: 0 auto;
@@ -191,83 +254,111 @@
 
   .section-label {
     font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
+    font-weight: 700;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--gray-4);
-    margin-bottom: 56px;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::before {
+    content: '';
+    width: 20px; height: 2px;
+    background: var(--accent);
+    display: inline-block;
+    flex-shrink: 0;
   }
 
   .section-title {
     font-family: var(--font-display);
-    font-size: clamp(32px, 4vw, 50px);
+    font-size: clamp(42px, 6vw, 72px);
     font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -0.8px;
-    color: var(--black);
-    margin-bottom: 64px;
-    max-width: 560px;
+    line-height: 0.95;
+    letter-spacing: 1px;
+    color: var(--text);
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    max-width: 640px;
   }
 
+  .section-title .accent-word { color: var(--accent); }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border-dim);
+  }
+
+  /* ─── SERVICES ─── */
   .services-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--gray-2);
-    border: 1px solid var(--gray-2);
+    gap: 2px;
+    background: var(--border-dim);
+    border: 1px solid var(--border-dim);
     border-radius: var(--radius);
     overflow: hidden;
   }
 
   .service-card {
-    background: var(--white);
+    background: var(--surface);
     padding: 44px 40px;
-    transition: background 0.2s;
+    transition: background 0.25s;
     cursor: default;
+    position: relative;
+    overflow: hidden;
   }
 
-  .service-card:hover { background: var(--gray-1); }
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  .service-card:hover { background: var(--surface-2); }
+  .service-card:hover::after { width: 100%; }
 
   .service-num {
     font-size: 11px;
-    font-weight: 500;
-    color: var(--gray-4);
-    letter-spacing: 0.1em;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     margin-bottom: 28px;
     display: block;
   }
 
   .service-name {
     font-family: var(--font-display);
-    font-size: 26px;
+    font-size: 32px;
     font-weight: 400;
-    color: var(--black);
+    color: var(--text);
     margin-bottom: 14px;
-    letter-spacing: -0.3px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
 
   .service-desc {
     font-size: 14px;
-    color: var(--gray-4);
-    line-height: 1.65;
-    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 400;
   }
 
-  /* WORK */
-  .work-section {
-    padding: 96px 48px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
+  /* ─── WORK ─── */
   .work-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 16px;
   }
 
   .work-card {
-    background: var(--gray-1);
+    background: var(--surface);
     border-radius: var(--radius);
     overflow: hidden;
     aspect-ratio: 4/3;
@@ -276,9 +367,13 @@
     padding: 24px;
     position: relative;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    border: 1px solid var(--border-dim);
+    transition: border-color 0.3s, transform 0.3s;
   }
-  .work-card:hover { transform: scale(1.02); }
+  .work-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
 
   .work-card-bg {
     position: absolute;
@@ -287,32 +382,48 @@
     align-items: center;
     justify-content: center;
     font-family: var(--font-display);
-    font-size: 80px;
-    opacity: 0.06;
-    color: var(--black);
+    font-size: 100px;
+    color: var(--accent);
+    opacity: 0.05;
     letter-spacing: -4px;
     pointer-events: none;
   }
 
-  .work-card-label {
-    position: relative;
-    z-index: 1;
+  /* accent corner tag */
+  .work-card-tag {
+    position: absolute;
+    top: 20px; right: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(170,255,0,0.1);
+    border: 1px solid rgba(170,255,0,0.25);
+    padding: 4px 10px;
+    border-radius: 3px;
   }
 
+  .work-card-label { position: relative; z-index: 1; }
+
   .work-client {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--black);
-    margin-bottom: 2px;
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 4px;
   }
 
   .work-type {
     font-size: 12px;
-    color: var(--gray-4);
-    font-weight: 300;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.08em;
   }
 
-  /* ABOUT STRIP */
+  /* ─── ABOUT ─── */
   .about-strip {
     padding: 96px 48px;
     max-width: 1100px;
@@ -320,92 +431,124 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 80px;
-    align-items: center;
+    align-items: start;
   }
 
-  .about-text {
+  .about-headline {
     font-family: var(--font-display);
-    font-size: clamp(26px, 3vw, 38px);
+    font-size: clamp(42px, 5vw, 64px);
     font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: -0.5px;
-    color: var(--black);
+    line-height: 0.95;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text);
   }
-
-  .about-text em { font-style: italic; color: var(--gray-4); }
+  .about-headline .accent-word { color: var(--accent); }
 
   .about-detail {
     font-size: 15px;
-    font-weight: 300;
-    color: var(--gray-4);
-    line-height: 1.75;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.8;
+    padding-top: 8px;
   }
-
   .about-detail p + p { margin-top: 20px; }
 
-  /* STATS */
+  /* ─── STATS ─── */
   .stats-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    background: var(--border-dim);
     gap: 1px;
-    background: var(--gray-2);
-    border: 1px solid var(--gray-2);
     border-radius: var(--radius);
     overflow: hidden;
-    margin-top: 80px;
+    border: 1px solid var(--border-dim);
   }
 
   .stat-item {
-    background: var(--white);
-    padding: 40px;
+    background: var(--surface);
+    padding: 44px 40px;
     text-align: center;
+    position: relative;
+  }
+  .stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 40px; height: 2px;
+    background: var(--accent);
   }
 
   .stat-num {
     font-family: var(--font-display);
-    font-size: 48px;
+    font-size: 56px;
     font-weight: 400;
-    color: var(--black);
-    letter-spacing: -1px;
+    color: var(--accent);
+    letter-spacing: 1px;
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    line-height: 1;
   }
 
   .stat-label {
-    font-size: 13px;
-    color: var(--gray-4);
-    font-weight: 300;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
 
-  /* CONTACT */
+  /* ─── CONTACT ─── */
   .contact-section {
     padding: 96px 48px 120px;
     max-width: 1100px;
     margin: 0 auto;
+  }
+
+  .contact-inner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 80px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
   }
 
-  .contact-section h2 {
+  .contact-inner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+  }
+
+  .contact-inner h2 {
     font-family: var(--font-display);
-    font-size: clamp(36px, 5vw, 62px);
+    font-size: clamp(48px, 7vw, 88px);
     font-weight: 400;
-    letter-spacing: -1px;
-    line-height: 1.08;
-    margin-bottom: 28px;
+    letter-spacing: 2px;
+    line-height: 0.95;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    color: var(--text);
   }
+  .contact-inner h2 .accent-word { color: var(--accent); }
 
-  .contact-section h2 em { font-style: italic; color: var(--gray-4); }
-
-  .contact-section p {
-    font-size: 16px;
-    color: var(--gray-4);
-    font-weight: 300;
+  .contact-inner p {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 400;
     margin-bottom: 44px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
   }
 
-  /* FOOTER */
+  /* ─── FOOTER ─── */
   footer {
-    border-top: 1px solid var(--gray-2);
+    border-top: 1px solid var(--border-dim);
     padding: 32px 48px;
     display: flex;
     align-items: center;
@@ -414,14 +557,23 @@
 
   .footer-logo {
     font-family: var(--font-display);
-    font-size: 18px;
-    color: var(--black);
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: var(--accent);
   }
 
   .footer-copy {
     font-size: 12px;
-    color: var(--gray-4);
-    font-weight: 300;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+
+  .footer-tagline {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    opacity: 0.6;
   }
 
   .footer-links {
@@ -431,52 +583,252 @@
   }
 
   .footer-links a {
-    font-size: 12px;
-    color: var(--gray-4);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
     text-decoration: none;
     transition: color 0.2s;
   }
-  .footer-links a:hover { color: var(--black); }
+  .footer-links a:hover { color: var(--accent); }
 
-  /* SCROLL ANIMATIONS */
+  /* ─── ANIMATIONS ─── */
   .fade-up {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.65s ease, transform 0.65s ease;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
   .fade-up.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
+  /* ─── RESPONSIVE ─── */
   @media (max-width: 700px) {
     nav { padding: 0 20px; }
     nav .nav-links { display: none; }
-    section, .work-section, .contact-section, footer { padding-left: 20px; padding-right: 20px; }
-    .services-grid, .work-grid { grid-template-columns: 1fr; }
-    .about-strip { grid-template-columns: 1fr; gap: 40px; }
+    .hero { padding: 120px 20px 60px; }
+    .section-wrap,
+    .about-strip,
+    .contact-section { padding-left: 20px; padding-right: 20px; }
+    .services-grid,
+    .work-grid,
     .stats-row { grid-template-columns: 1fr; }
+    .about-strip { grid-template-columns: 1fr; gap: 40px; }
+    .contact-inner { padding: 40px 24px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+    .trust-bar { gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .hero-bg-text { font-size: 120px; opacity: 0.03; }
+  }
+
+  /* ─── SCROLL PROGRESS ─── */
+  #scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+    z-index: 1000;
+    pointer-events: none;
+  }
+
+  /* ─── BACKGROUND GRID & TEXTURE ─── */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 50% 50%, transparent 0%, rgba(8, 10, 8, 0.4) 100%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 40px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 40px);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ─── CUSTOM CURSOR ─── */
+  .custom-cursor-dot,
+  .custom-cursor-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: normal;
+    transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease, background 0.3s ease, border-color 0.3s ease, border-radius 0.3s ease, opacity 0.2s ease;
+    opacity: 0;
+  }
+
+  .custom-cursor-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  .custom-cursor-follower {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), width 0.3s ease, height 0.3s ease, background 0.3s ease, border-color 0.3s ease, opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: 800;
+    color: var(--bg);
+    letter-spacing: 0.1em;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  /* Cursor hover states */
+  body.cursor-hover .custom-cursor-dot {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+
+  body.cursor-hover .custom-cursor-follower {
+    width: 50px;
+    height: 50px;
+    background: var(--accent);
+    border-color: var(--accent);
+    mix-blend-mode: difference;
+  }
+
+  body.cursor-view-project .custom-cursor-dot {
+    opacity: 0;
+  }
+
+  body.cursor-view-project .custom-cursor-follower {
+    width: 60px;
+    height: 60px;
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+    font-family: var(--font-body);
+    font-weight: 700;
+  }
+
+  /* Support for custom text inside the follower */
+  .custom-cursor-follower span {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  body.cursor-view-project .custom-cursor-follower span {
+    opacity: 1;
+  }
+
+  /* Hide default cursor only when custom cursor is active */
+  body.custom-cursor-active,
+  body.custom-cursor-active a,
+  body.custom-cursor-active button,
+  body.custom-cursor-active .work-card,
+  body.custom-cursor-active .service-card {
+    cursor: none;
+  }
+
+  /* ─── RADIAL HOVER GLOW ─── */
+  .service-card, .work-card, .contact-inner {
+    position: relative;
+  }
+
+  /* Card glow pseudo-element */
+  .service-card::before,
+  .work-card::before,
+  .contact-inner::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    background: radial-gradient(
+      800px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+      rgba(170, 255, 0, 0.15),
+      transparent 40%
+    );
+    z-index: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .service-card:hover::before,
+  .work-card:hover::before,
+  .contact-inner:hover::before {
+    opacity: 1;
+  }
+
+  /* Inner card structure adjustment for layering */
+  .service-card > *,
+  .work-card > *,
+  .contact-inner > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── MAGNETIC CTA BUTTONS ─── */
+  .btn-primary, .btn-ghost, .nav-cta {
+    display: inline-block;
+    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  /* ─── PREMIUM GLASSMORPHISM REFINE ─── */
+  nav {
+    border-bottom: 1px solid rgba(170, 255, 0, 0.15) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .service-card, .work-card {
+    background: rgba(15, 18, 15, 0.7) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    transition: border-color 0.3s, transform 0.3s, background 0.3s;
+  }
+
+  .service-card:hover, .work-card:hover {
+    border-color: rgba(170, 255, 0, 0.3) !important;
+    background: rgba(22, 26, 22, 0.85) !important;
+  }
+
+  .contact-inner {
+    background: rgba(15, 18, 15, 0.6) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(170, 255, 0, 0.25) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   }
 </style>
 </head>
 <body>
 
+<!-- Scroll Progress -->
+<div id="scroll-progress"></div>
+
+<!-- Custom Cursor -->
+<div class="custom-cursor-dot" id="cursor-dot"></div>
+<div class="custom-cursor-follower" id="cursor-follower"><span>VIEW</span></div>
+
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#">Evrio</a>
+  <a class="nav-logo" href="#">EVRIO</a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a class="nav-cta" href="#contact">Get in touch</a>
+  <a class="nav-cta" href="#contact">Let's connect!</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg-text">EVRIO</div>
   <p class="hero-eyebrow">Creative Digital Studio</p>
-  <h1>Design that <em>moves</em><br>people forward</h1>
+  <h1>Design that<br><span class="accent-word">moves</span><br>people forward</h1>
   <p class="hero-sub">We craft digital experiences that are precise, purposeful, and built to last.</p>
   <div class="hero-actions">
     <a class="btn-primary" href="#work">View our work</a>
@@ -484,12 +836,21 @@
   </div>
 </section>
 
-<div class="divider"></div>
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <span>Kerala, India</span>
+  <div class="dot"></div>
+  <span>100% Client Satisfaction</span>
+  <div class="dot"></div>
+  <span>UI · Web · Marketing · Security</span>
+  <div class="dot"></div>
+  <span>Real results. Real work.</span>
+</div>
 
 <!-- SERVICES -->
-<section id="services">
+<div class="section-wrap" id="services">
   <p class="section-label">What we do</p>
-  <h2 class="section-title">Every pixel with intention</h2>
+  <h2 class="section-title">Every pixel<br>with <span class="accent-word">intention</span></h2>
   <div class="services-grid">
     <div class="service-card fade-up">
       <span class="service-num">01</span>
@@ -512,30 +873,34 @@
       <p class="service-desc">Protecting your digital presence with rigorous security practices, compliance frameworks, and risk management.</p>
     </div>
   </div>
-</section>
+</div>
 
 <div class="divider"></div>
 
 <!-- WORK -->
-<div class="work-section" id="work">
+<div class="section-wrap" id="work">
   <p class="section-label">Selected work</p>
+  <h2 class="section-title">What we've<br><span class="accent-word">built</span></h2>
   <div class="work-grid">
     <div class="work-card fade-up">
       <div class="work-card-bg">YV</div>
+      <div class="work-card-tag">2025</div>
       <div class="work-card-label">
         <p class="work-client">YouVue</p>
         <p class="work-type">Brand Identity & Digital</p>
       </div>
     </div>
-    <div class="work-card fade-up" style="transition-delay:0.08s; background:#f0ede8;">
+    <div class="work-card fade-up" style="transition-delay:0.08s;">
       <div class="work-card-bg">WC</div>
+      <div class="work-card-tag">2025</div>
       <div class="work-card-label">
         <p class="work-client">Well Care Fiber</p>
         <p class="work-type">Branding & Print</p>
       </div>
     </div>
-    <div class="work-card fade-up" style="transition-delay:0.16s; background:#e8ece8;">
+    <div class="work-card fade-up" style="transition-delay:0.16s;">
       <div class="work-card-bg">EV</div>
+      <div class="work-card-tag">2026</div>
       <div class="work-card-label">
         <p class="work-client">Evrio Studio</p>
         <p class="work-type">Brand System</p>
@@ -548,12 +913,16 @@
 
 <!-- ABOUT -->
 <div class="about-strip" id="about">
-  <div class="about-text fade-up">
-    We believe great design is never just <em>visual</em> — it's a solution in disguise.
+  <div>
+    <p class="section-label">About us</p>
+    <h2 class="about-headline fade-up">Great design is never just <span class="accent-word">visual.</span><br>It's a solution in disguise.</h2>
   </div>
   <div class="about-detail fade-up" style="transition-delay:0.1s">
     <p>Evrio is a creative digital studio based in Kerala, India. We work with brands who care about doing things properly — thoughtful strategy, refined design, and engineering that holds up.</p>
     <p>Our team brings together expertise in design, development, and security to deliver work that is as dependable as it is beautiful.</p>
+    <p style="margin-top:32px;">
+      <a class="btn-primary" href="#contact" style="display:inline-block;">Let's connect!</a>
+    </p>
   </div>
 </div>
 
@@ -569,8 +938,8 @@
       <span class="stat-label">Client satisfaction</span>
     </div>
     <div class="stat-item">
-      <span class="stat-num">Kerala</span>
-      <span class="stat-label">Based in India</span>
+      <span class="stat-num">KL</span>
+      <span class="stat-label">Based in Kerala</span>
     </div>
   </div>
 </div>
@@ -579,15 +948,18 @@
 
 <!-- CONTACT -->
 <div class="contact-section" id="contact">
-  <h2 class="fade-up">Ready to build<br>something <em>great</em>?</h2>
-  <p class="fade-up" style="transition-delay:0.08s">Tell us about your project and we'll get back to you within 24 hours.</p>
-  <a class="btn-primary fade-up" style="transition-delay:0.16s; display:inline-block; font-size:15px; padding:16px 40px;" href="mailto:evrioindia@gmail.com">evrioindia@gmail.com</a>
+  <div class="contact-inner">
+    <h2 class="fade-up">Ready to build<br>something <span class="accent-word">great?</span></h2>
+    <p class="fade-up" style="transition-delay:0.08s">Tell us about your project and we'll get back to you within 24 hours.</p>
+    <a class="btn-primary fade-up" style="transition-delay:0.16s; display:inline-block; font-size:13px; padding:16px 40px;" href="mailto:hello@evrio.in">hello@evrio.in</a>
+  </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <span class="footer-logo">Evrio</span>
+  <span class="footer-logo">EVRIO</span>
   <p class="footer-copy">© 2026 Evrio. All rights reserved.</p>
+  <p class="footer-tagline">Crafted with love ✦ Kerala, India</p>
   <ul class="footer-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#work">Work</a></li>
@@ -596,6 +968,7 @@
 </footer>
 
 <script>
+// --- SCROLL REVEALS ---
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -603,10 +976,11 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(e.target);
     }
   });
-}, { threshold: 0.12 });
+}, { threshold: 0.10 });
 
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
+// --- SMOOTH SCROLLING ---
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
@@ -616,6 +990,130 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+// --- SCROLL PROGRESS & PARALLAX ---
+const scrollProgress = document.getElementById('scroll-progress');
+const heroBgText = document.querySelector('.hero-bg-text');
+
+window.addEventListener('scroll', () => {
+  // Update scroll progress bar
+  const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+  if (totalScroll > 0) {
+    const progress = (window.scrollY / totalScroll) * 100;
+    scrollProgress.style.width = `${progress}%`;
+  }
+
+  // Hero BG text parallax
+  if (heroBgText) {
+    const scrollVal = window.scrollY;
+    heroBgText.style.transform = `translate3d(${-scrollVal * 0.35}px, -50%, 0)`;
+  }
+}, { passive: true });
+
+// --- CUSTOM CURSOR SYSTEM ---
+const cursorDot = document.getElementById('cursor-dot');
+const cursorFollower = document.getElementById('cursor-follower');
+const hasTouch = window.matchMedia("(pointer: coarse)").matches;
+
+if (!hasTouch && cursorDot && cursorFollower) {
+  document.body.classList.add('custom-cursor-active');
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let followerX = 0;
+  let followerY = 0;
+  let isCursorVisible = false;
+
+  // Track mouse coordinates
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    if (!isCursorVisible) {
+      cursorDot.style.opacity = '1';
+      cursorFollower.style.opacity = '1';
+      isCursorVisible = true;
+    }
+
+    // Instantly place the central dot
+    cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+  });
+
+  // Lerp loop for elastic follower lag
+  const animateFollower = () => {
+    followerX += (mouseX - followerX) * 0.15;
+    followerY += (mouseY - followerY) * 0.15;
+
+    cursorFollower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0)`;
+    requestAnimationFrame(animateFollower);
+  };
+  requestAnimationFrame(animateFollower);
+
+  // Viewport exit/entry logic
+  document.addEventListener('mouseleave', () => {
+    cursorDot.style.opacity = '0';
+    cursorFollower.style.opacity = '0';
+    isCursorVisible = false;
+  });
+
+  document.addEventListener('mouseenter', () => {
+    cursorDot.style.opacity = '1';
+    cursorFollower.style.opacity = '1';
+    isCursorVisible = true;
+  });
+
+  // Setup interactive states
+  const interactives = document.querySelectorAll('a, button, input, textarea, select');
+  interactives.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      document.body.classList.add('cursor-hover');
+    });
+    el.addEventListener('mouseleave', () => {
+      document.body.classList.remove('cursor-hover');
+    });
+  });
+
+  // Morph follower for selected work cards
+  const workCards = document.querySelectorAll('.work-card');
+  workCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      document.body.classList.add('cursor-view-project');
+    });
+    card.addEventListener('mouseleave', () => {
+      document.body.classList.remove('cursor-view-project');
+    });
+  });
+}
+
+// --- RADIAL CARD GLOW EFFECTS ---
+const glowCards = document.querySelectorAll('.service-card, .work-card, .contact-inner');
+glowCards.forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  });
+});
+
+// --- MAGNETIC BUTTONS SYSTEM ---
+const magneticButtons = document.querySelectorAll('.btn-primary, .btn-ghost, .nav-cta');
+if (!hasTouch) {
+  magneticButtons.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - (rect.left + rect.width / 2);
+      const y = e.clientY - (rect.top + rect.height / 2);
+      
+      btn.style.transform = `translate3d(${x * 0.3}px, ${y * 0.3}px, 0) scale(1.05)`;
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate3d(0px, 0px, 0px) scale(1)';
+    });
+  });
+}
 </script>
 
 </body>
